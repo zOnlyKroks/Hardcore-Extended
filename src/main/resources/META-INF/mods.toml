@@ -28,7 +28,7 @@ description='''
 This Mod deletes your whole Minecraft world if you take damage :)
 '''
 
-[[dependencies.examplemod]] #optional
+[[dependencies.nodamod]] #optional
 
     modId="forge" #mandatory
 
@@ -38,9 +38,9 @@ This Mod deletes your whole Minecraft world if you take damage :)
 
     ordering="NONE"
 
-    side="BOTH"
+    side="CLIENT"
 
-[[dependencies.examplemod]]
+[[dependencies.nodamod]]
     modId="minecraft"
     mandatory=true
 
