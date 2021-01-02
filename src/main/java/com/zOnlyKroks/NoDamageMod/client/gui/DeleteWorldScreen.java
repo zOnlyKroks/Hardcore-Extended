@@ -3,7 +3,6 @@ package com.zOnlyKroks.NoDamageMod.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
-import com.sun.istack.internal.NotNull;
 import com.zOnlyKroks.NoDamageMod.NoDamageMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
@@ -18,6 +17,7 @@ import net.minecraft.world.storage.SaveFormat;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
