@@ -1,6 +1,6 @@
 package com.zOnlyKroks.NoDamageMod;
 
-import com.zOnlyKroks.NoDamageMod.event.DamageEvent;
+import com.zOnlyKroks.NoDamageMod.event.DamageHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -21,7 +21,8 @@ public class NoDamageMod
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
 
-        MinecraftForge.EVENT_BUS.register(new DamageEvent());
+        MinecraftForge.EVENT_BUS.register(new DamageHandler());
+        //MinecraftForge.EVENT_BUS.register(new WindowCloseEvent());
 
         MinecraftForge.EVENT_BUS.register(this);
     }
