@@ -4,7 +4,7 @@ loaderVersion="[35,)"
 
 license="All rights reserved"
 
-issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/zOnlyKroks/No_Damage_Mod/issues" #optional
 
 [[mods]] #mandatory
 
@@ -25,7 +25,7 @@ credits="To all my suporters" #optional
 authors="zOnlyKroks" #optional
 
 description='''
-This Mod deletes your whole Minecraft world if you take damage :)
+A Mod wich automates the No Damage Challange
 '''
 
 [[dependencies.nodamod]] #optional

@@ -13,6 +13,7 @@ import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.world.GameType;
 import net.minecraft.world.storage.SaveFormat;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -74,7 +75,9 @@ public class DeleteWorldScreen extends Screen {
         // Add button for respawn.
         this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 72, 200, 20, new TranslationTextComponent("deathScreen.spectate"), (p_213021_1_) -> {
             // Respawn player.
+
             Objects.requireNonNull(this.minecraft.player).respawnPlayer();
+
 
             // Close screen.
             this.minecraft.displayGuiScreen(null);
