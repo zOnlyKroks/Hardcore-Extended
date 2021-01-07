@@ -1,9 +1,9 @@
-package com.zOnlyKroks.NoDamageMod.client.gui;
+package com.zOnlyKroks.Hardcoreex.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
-import com.zOnlyKroks.NoDamageMod.NoDamageMod;
+import com.zOnlyKroks.Hardcoreex.Hardcore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
@@ -13,7 +13,6 @@ import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.world.GameType;
 import net.minecraft.world.storage.SaveFormat;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,7 +30,7 @@ import java.util.Objects;
  */
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = NoDamageMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Hardcore.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class DeleteWorldScreen extends Screen {
     /**
      * The integer value containing the number of ticks that have passed since the player's death

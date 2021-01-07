@@ -1,6 +1,6 @@
-package com.zOnlyKroks.NoDamageMod;
+package com.zOnlyKroks.Hardcoreex;
 
-import com.zOnlyKroks.NoDamageMod.event.DamageHandler;
+import com.zOnlyKroks.Hardcoreex.event.DamageHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -11,14 +11,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-@Mod("nodamod")
-public class NoDamageMod
+@Mod("hardcoreex")
+public class Hardcore
 {
 
-    public static final String MOD_ID = "nodamod";
+    public static final String MOD_ID = "hardcoreex";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public NoDamageMod() {
+    public Hardcore() {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 

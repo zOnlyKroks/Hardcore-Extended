@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '0.1'
-group = 'com.zOnlyKroks.NoDamageMod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'nodamod'
+group = 'com.zOnlyKroks.hardcoreex' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'hardcoreex'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 

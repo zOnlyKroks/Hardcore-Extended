@@ -4,15 +4,15 @@ loaderVersion="[35,)"
 
 license="All rights reserved"
 
-issueTrackerURL="https://github.com/zOnlyKroks/No_Damage_Mod/issues" #optional
+issueTrackerURL="https://github.com/zOnlyKroks/Hardcore-Extended/issues" #optional
 
 [[mods]] #mandatory
 
-modId="nodamod" #mandatory
+modId="hardcoreex" #mandatory
 
 version="0.1" #mandatory
 
-displayName="No Damage Mod" #mandatory
+displayName="Hardcore Extended" #mandatory
 
 updateJSONURL="http://myurl.me/" #optional
 
