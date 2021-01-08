@@ -1,12 +1,17 @@
 package com.zOnlyKroks.Hardcoreex;
 
-import com.zOnlyKroks.Hardcoreex.event.DamageHandler;
+import com.zOnlyKroks.Hardcoreex.config.Config;
+import com.zOnlyKroks.Hardcoreex.event.*;
+import net.minecraft.world.Dimension;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLFingerprintViolationEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +29,14 @@ public class Hardcore
 
 
         MinecraftForge.EVENT_BUS.register(new DamageHandler());
+        MinecraftForge.EVENT_BUS.register(new JumpEvent());
+        MinecraftForge.EVENT_BUS.register(new HealingEvent());
+        MinecraftForge.EVENT_BUS.register(new BlockBreackEvent());
+        MinecraftForge.EVENT_BUS.register(new SleepEvent());
+        MinecraftForge.EVENT_BUS.register(new NoDayEvent());
+
+        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
+        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -40,6 +53,9 @@ public class Hardcore
                 + " may have been tampered with. This version will NOT be supported by the author!");
         LOGGER.warn("Expected " + event.getExpectedFingerprint() + " found " + event.getFingerprints().toString());
     }
+
+
+
 
 
 

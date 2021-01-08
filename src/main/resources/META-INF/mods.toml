@@ -10,15 +10,15 @@ issueTrackerURL="https://github.com/zOnlyKroks/Hardcore-Extended/issues" #option
 
 modId="hardcoreex" #mandatory
 
-version="0.1" #mandatory
+version="0.5" #mandatory
 
 displayName="Hardcore Extended" #mandatory
 
 updateJSONURL="http://myurl.me/" #optional
 
-displayURL="http://example.com/" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/hardcore-extended" #optional
 
-logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 
 credits="To all my suporters" #optional
 
