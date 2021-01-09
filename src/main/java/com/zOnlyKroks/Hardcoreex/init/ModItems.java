@@ -1,7 +1,6 @@
-package com.zOnlyKroks.Hardcoreex.util;
+package com.zOnlyKroks.Hardcoreex.init;
 
 import com.zOnlyKroks.Hardcoreex.Hardcore;
-import com.zOnlyKroks.Hardcoreex.config.Config;
 import com.zOnlyKroks.Hardcoreex.items.ConfigItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;

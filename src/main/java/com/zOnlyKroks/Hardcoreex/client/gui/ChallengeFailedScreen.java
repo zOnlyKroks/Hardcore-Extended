@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
 import com.zOnlyKroks.Hardcoreex.Hardcore;
+import com.zOnlyKroks.Hardcoreex.challenge.Challenge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
@@ -13,6 +14,7 @@ import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.world.GameType;
 import net.minecraft.world.storage.SaveFormat;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,23 +33,25 @@ import java.util.Objects;
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = Hardcore.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class DeleteWorldScreen extends Screen {
+public class ChallengeFailedScreen extends Screen {
+    private Challenge challenge;
     /**
      * The integer value containing the number of ticks that have passed since the player's death
      */
-    private final ITextComponent causeOfDeath;
+    private final ITextComponent failedCause;
     private ITextComponent scoreText;
 
     /**
      * Delete world constructor.
      *
-     * @param textComponent cause of death.
+     * @param challenge the failed challenge.
      */
-    public DeleteWorldScreen(@Nullable ITextComponent textComponent) {
-        super(new TranslationTextComponent("nodamod.delete_world.title"));
-
+    public ChallengeFailedScreen(Challenge challenge) {
+        super(new TranslationTextComponent("hardcoreex.failed_challenge.title"));
+        
         // Assign variables.
-        this.causeOfDeath = textComponent;
+        this.challenge = challenge;
+        this.failedCause = new TranslationTextComponent("hardcoreex.failed_challenge.message", challenge.getLocalizedName());
     }
 
     /**
@@ -64,7 +68,7 @@ public class DeleteWorldScreen extends Screen {
         // This if statement will only true when enabled and set to system or all.
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
             // Let the narrator say things.
-            Narrator.getNarrator().say("Are you sure you want to exit Minecraft?", true);
+            Narrator.getNarrator().say("You failed the " + challenge.getLocalizedName() + " challenge!", true);
         }
 
         // Clear widgets from older screen. So there will no copies of older instances.
@@ -74,14 +78,17 @@ public class DeleteWorldScreen extends Screen {
         // Add button for respawn.
         this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 72, 200, 20, new TranslationTextComponent("deathScreen.spectate"), (p_213021_1_) -> {
             // Respawn player.
+            if (!getMinecraft().isIntegratedServerRunning()) {
+                throw new IllegalStateException("Expected to have integrated server running!");
+            }
 
             Objects.requireNonNull(this.minecraft.player).respawnPlayer();
-
+            Objects.requireNonNull(this.minecraft.getIntegratedServer()).setGameType(GameType.SPECTATOR);
 
             // Close screen.
             this.minecraft.displayGuiScreen(null);
         }));
-        this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslationTextComponent("nodamod.delete_world.delete"), (p_213020_1_) -> {
+        this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslationTextComponent("hardcoreex.delete_world.delete"), (p_213020_1_) -> {
             // Delete world.
             this.unloadAndDeleteWorld();
         }));
@@ -154,17 +161,17 @@ public class DeleteWorldScreen extends Screen {
         RenderSystem.popMatrix();
         
         // Check if the cause of death isn't nothing.
-        if (this.causeOfDeath != null) {
+        if (this.failedCause != null) {
             // Draw a string representing the cause of death.
-            drawCenteredString(matrixStack, this.font, this.causeOfDeath, this.width / 2, 85, 16777215);
+            drawCenteredString(matrixStack, this.font, this.failedCause, this.width / 2, 85, 16777215);
         }
 
         // Draw the score information.
         drawCenteredString(matrixStack, this.font, this.scoreText, this.width / 2, 100, 16777215);
         
         // Not really know what this does, but it's in the death screen.
-        if (this.causeOfDeath != null && mouseY > 85 && mouseY < 85 + 9) {
-            Style style = this.func_238623_a_(mouseX);
+        if (this.failedCause != null && mouseY > 85 && mouseY < 85 + 9) {
+            Style style = this.getStyle(mouseX);
             this.renderComponentHoverEffect(matrixStack, style, mouseX, mouseY);
         }
 
@@ -179,14 +186,14 @@ public class DeleteWorldScreen extends Screen {
      * @return the requested hover effect.
      */
     @Nullable
-    private Style func_238623_a_(int mouseX) {
-        if (this.causeOfDeath == null) {
+    private Style getStyle(int mouseX) {
+        if (this.failedCause == null) {
             return null;
         } else {
-            int i = Objects.requireNonNull(this.minecraft).fontRenderer.getStringPropertyWidth(this.causeOfDeath);
+            int i = Objects.requireNonNull(this.minecraft).fontRenderer.getStringPropertyWidth(this.failedCause);
             int j = this.width / 2 - i / 2;
             int k = this.width / 2 + i / 2;
-            return mouseX >= j && mouseX <= k ? this.minecraft.fontRenderer.getCharacterManager().func_238357_a_(this.causeOfDeath, mouseX - j) : null;
+            return mouseX >= j && mouseX <= k ? this.minecraft.fontRenderer.getCharacterManager().func_238357_a_(this.failedCause, mouseX - j) : null;
         }
     }
 
@@ -199,8 +206,8 @@ public class DeleteWorldScreen extends Screen {
      * @return something what looks like a flag.
      */
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (this.causeOfDeath != null && mouseY > 85.0D && mouseY < (double)(85 + 9)) {
-            Style style = this.func_238623_a_((int)mouseX);
+        if (this.failedCause != null && mouseY > 85.0D && mouseY < (double)(85 + 9)) {
+            Style style = this.getStyle((int)mouseX);
             if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
                 this.handleComponentClicked(style);
                 return false;
