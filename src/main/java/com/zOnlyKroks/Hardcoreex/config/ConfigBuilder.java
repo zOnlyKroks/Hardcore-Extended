@@ -10,6 +10,7 @@ public class ConfigBuilder {
     public static ForgeConfigSpec.BooleanValue no_block_breaking_challange;
     public static ForgeConfigSpec.BooleanValue no_sleep_challange;
     public static ForgeConfigSpec.BooleanValue no_day_challange;
+    public static ForgeConfigSpec.BooleanValue no_sprinting_challange;
 
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client) {
 
@@ -38,6 +39,10 @@ public class ConfigBuilder {
         no_day_challange = server
                 .comment("Decide if you want the No Day Challange")
                 .define("challanges.no_day_challange", false);
+
+        no_sprinting_challange = server
+                .comment("Decide if you want the No Sprinting Challange")
+                .define("challanges.no_sprinting_challange", false);
 
     }
 

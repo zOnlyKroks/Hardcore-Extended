@@ -2,6 +2,9 @@ package com.zOnlyKroks.Hardcoreex;
 
 import com.zOnlyKroks.Hardcoreex.config.Config;
 import com.zOnlyKroks.Hardcoreex.event.*;
+import com.zOnlyKroks.Hardcoreex.util.ModItems;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +37,7 @@ public class Hardcore
         MinecraftForge.EVENT_BUS.register(new BlockBreackEvent());
         MinecraftForge.EVENT_BUS.register(new SleepEvent());
         MinecraftForge.EVENT_BUS.register(new NoDayEvent());
+        MinecraftForge.EVENT_BUS.register(new PlayerSprintEvent());
 
         Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
         Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
@@ -56,7 +60,14 @@ public class Hardcore
 
 
 
+    public static final ItemGroup TAB = new ItemGroup("HardcoreExtendedItemGroup ") {
 
+
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModItems.CONFIG_ITEM.get());
+        }
+    };
 
 
 
