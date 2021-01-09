@@ -34,7 +34,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = HardcoreExtended.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ChallengeFailedScreen extends Screen {
-    private Challenge challenge;
+    private final Challenge challenge;
     /**
      * The integer value containing the number of ticks that have passed since the player's death
      */
@@ -74,13 +74,13 @@ public class ChallengeFailedScreen extends Screen {
         // Clear widgets from older screen. So there will no copies of older instances.
         this.buttons.clear();
         this.children.clear();
+        // Respawn player.
+        if (!getMinecraft().isIntegratedServerRunning()) {
+            throw new IllegalStateException("Expected to have integrated server running!");
+        }
 
         if (this.minecraft.player == null) {
             throw new NullPointerException("Client player is null!");
-        }
-
-        if (!this.minecraft.isIntegratedServerRunning()) {
-            throw new IllegalStateException("Integrated server isn't running.");
         }
 
         if (this.minecraft.getIntegratedServer() == null) {
@@ -98,17 +98,15 @@ public class ChallengeFailedScreen extends Screen {
                 throw new NullPointerException("Client player is null!");
             }
 
-            if (!this.minecraft.isIntegratedServerRunning()) {
-                throw new IllegalStateException("Integrated server isn't running.");
-            }
-
             if (this.minecraft.getIntegratedServer() == null) {
                 throw new NullPointerException("Integrated server is null!");
             }
-            this.minecraft.player.setGameType(GameType.SPECTATOR);
+
+            // Respawn player.
             this.minecraft.player.respawnPlayer();
-            this.minecraft.getIntegratedServer().setGameType(GameType.SPECTATOR);
-            this.minecraft.player.setGameType(GameType.SPECTATOR);
+
+            // Set to spectator.
+            Objects.requireNonNull(this.minecraft.getIntegratedServer().getPlayerList().getPlayerByUUID(this.minecraft.player.getUniqueID())).setGameType(GameType.SPECTATOR);
 
             // Close screen.
             this.minecraft.displayGuiScreen(null);
