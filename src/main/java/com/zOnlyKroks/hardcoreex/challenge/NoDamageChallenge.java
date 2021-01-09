@@ -1,5 +1,7 @@
 package com.zOnlyKroks.hardcoreex.challenge;
 
+import com.zOnlyKroks.hardcoreex.config.Config;
+import com.zOnlyKroks.hardcoreex.config.ConfigBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  */
 public class NoDamageChallenge extends Challenge {
     public NoDamageChallenge() {
-        super();
+        super(ConfigBuilder.no_damage_challange);
     }
 
     /**

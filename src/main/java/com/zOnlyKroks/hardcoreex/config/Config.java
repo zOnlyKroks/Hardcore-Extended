@@ -4,7 +4,11 @@ import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import com.zOnlyKroks.hardcoreex.HardcoreExtended;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 
@@ -34,4 +38,25 @@ public class Config {
         HardcoreExtended.LOGGER.info("Loaded config: " + path);
         config.setConfig(file);
     }
+
+    public static void init() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT);
+    }
+
+    public static void sync() {
+        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
+        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
+    }
+
+    @SubscribeEvent
+    public static void sync(ModConfig.Loading event) {
+        sync();
+    }
+
+    @SubscribeEvent
+    public static void sync(ModConfig.Reloading event) {
+        sync();
+    }
+
 }

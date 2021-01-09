@@ -1,6 +1,7 @@
 package com.zOnlyKroks.hardcoreex.challenge;
 
 import com.zOnlyKroks.hardcoreex.HardcoreExtended;
+import com.zOnlyKroks.hardcoreex.config.ConfigBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.world.GameRules;
@@ -19,7 +20,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
  */
 public class NoDayChallenge extends Challenge {
     public NoDayChallenge() {
-        super();
+        super(ConfigBuilder.no_day_challange);
     }
 
     /**

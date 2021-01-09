@@ -26,7 +26,8 @@ public abstract class Challenge implements IChallengeProvider, IForgeRegistryEnt
 
     private ResourceLocation registryName;
 
-    public Challenge() {
+    public Challenge(ForgeConfigSpec.BooleanValue configSpec) {
+        setConfigSpec(configSpec);
         if (getConfigSpec().get() && !this.enabled) {
             enable();
         }

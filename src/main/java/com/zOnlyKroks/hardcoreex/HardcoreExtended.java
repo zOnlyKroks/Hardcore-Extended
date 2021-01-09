@@ -47,17 +47,17 @@ public class HardcoreExtended {
         modEventBus.addListener(this::setup);
 
         // Load configurations.
-        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
-        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
+        Config.init();
+//        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
+//        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
 
         // Create registry for challenges.
-        DeferredRegister<Challenge> registry = DeferredRegister.create(Challenge.class, HardcoreExtended.MOD_ID);
-        registry.makeRegistry("challenges", RegistryBuilder::new);
-        CHALLENGES_REGISTRY = registry;
-        registry.register(modEventBus);
+//        CHALLENGES_REGISTRY = registry;
 
         // Register event bus to item deferred register, so the items will be registered.
         ModItems.ITEMS.register(modEventBus);
+        ModChallenges.CHALLENGES.register(modEventBus);
+//        ModChallenges.init();
 
         // Register HardcoreExtended mod to the forge event bus.
         MinecraftForge.EVENT_BUS.register(this);

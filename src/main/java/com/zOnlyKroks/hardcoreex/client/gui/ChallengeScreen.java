@@ -54,7 +54,7 @@ public class ChallengeScreen extends Screen {
    }
 
    protected void init() {
-      this.closeButton = this.addButton(new Button(this.width / 2 + 4, this.height - 48, 150, 20, DialogTexts.GUI_DONE, (p_238903_1_) -> this.closeScreen()));
+      this.closeButton = this.addButton(new Button(this.width / 2 - 75, this.height - 48, 150, 20, DialogTexts.GUI_DONE, (p_238903_1_) -> this.closeScreen()));
       
       // Todo: allow creating custom challenges using challenge packs.
 //      this.addButton(new Button(this.width / 2 - 154, this.height - 48, 150, 20, new TranslationTextComponent("pack.openFolder"), (p_238896_1_) -> {
@@ -80,6 +80,7 @@ public class ChallengeScreen extends Screen {
       this.reloadAll();
    }
 
+   // Todo: add support for custom challenges using .zip / .jar files. (or whatever filetype.)
 //   public void tick() {
 //      if (this.field_243393_t > 0L && --this.field_243393_t == 0L) {
 //         this.reloadAll();
@@ -97,9 +98,6 @@ public class ChallengeScreen extends Screen {
       // Reload challenges.
       this.reloadChallenges(this.rightScreen, this.enabled);
       this.reloadChallenges(this.leftScreen, this.disabled);
-      
-      // Close button.
-      this.closeButton.active = !this.rightScreen.getEventListeners().isEmpty();
    }
 
    private void reloadChallenges(ChallengeList list, List<Challenge> challenges) {
@@ -119,11 +117,8 @@ public class ChallengeScreen extends Screen {
    }
 
    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-//      this.renderDirtBackground(0);
-      
-      // Render background.
-      this.renderBackground(matrixStack);
-      
+      this.renderDirtBackground(0);
+
       // Render lists.
       this.leftScreen.render(matrixStack, mouseX, mouseY, partialTicks);
       this.rightScreen.render(matrixStack, mouseX, mouseY, partialTicks);

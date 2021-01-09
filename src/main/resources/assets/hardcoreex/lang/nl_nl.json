@@ -1,4 +1,6 @@
 {
   "hardcoreex.delete_world.title": "Je bent dood gegaan in een No-Damage-Challenge!",
-  "hardcoreex.delete_world.delete": "Verwijder wereld"
+  "hardcoreex.delete_world.delete": "Verwijder wereld",
+
+  "challenge.hardcoreex.no_damage.name": "Geen schade"
 }
