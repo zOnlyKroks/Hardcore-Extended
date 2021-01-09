@@ -72,18 +72,18 @@ public class HardcoreExtended {
 
     }
 
-    /**
-     * Note: this uses deprecated API. Don't know why...
-     *
-     * @param event the {@link FMLFingerprintViolationEvent FML Fingerprint Violation Event}.
-     */
-    @SuppressWarnings("deprecation")
-    @SubscribeEvent
-    public void onFingerprintViolation(final FMLFingerprintViolationEvent event) {
-        LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName()
-                + " may have been tampered with. This version will NOT be supported by the author!");
-        LOGGER.warn("Expected " + event.getExpectedFingerprint() + " found " + event.getFingerprints().toString());
-    }
+//    /**
+//     * Note: this uses deprecated API. Don't know why...
+//     *
+//     * @param event the {@link FMLFingerprintViolationEvent FML Fingerprint Violation Event}.
+//     */
+//    @SuppressWarnings("deprecation")
+//    @SubscribeEvent
+//    public void onFingerprintViolation(final FMLFingerprintViolationEvent event) {
+//        LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName()
+//                + " may have been tampered with. This version will NOT be supported by the author!");
+//        LOGGER.warn("Expected " + event.getExpectedFingerprint() + " found " + event.getFingerprints().toString());
+//    }
 
     /**
      * Main item group for the Hardcore Extended Mod.
