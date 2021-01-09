@@ -33,15 +33,21 @@ public class NoDayChallenge extends Challenge {
         IntegratedServer integratedServer = Minecraft.getInstance().getIntegratedServer();
         GameRules gameRules = null;
         if (integratedServer != null) {
-            gameRules = integratedServer.getGameRules();
-
-            GameRules.BooleanValue doDayLightCycle = gameRules.get(GameRules.DO_DAYLIGHT_CYCLE);
-            doDayLightCycle.set(false, integratedServer);
-            HardcoreExtended.LOGGER.debug(doDayLightCycle + "(doDaylightCycle)");
-
             for (ServerWorld world : integratedServer.getWorlds()) {
                 IServerWorldInfo worldInfo = (IServerWorldInfo) (world.getWorldInfo());
                 worldInfo.setDayTime(18000);
+            }
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        IntegratedServer integratedServer = Minecraft.getInstance().getIntegratedServer();
+        GameRules gameRules = null;
+        if (integratedServer != null) {
+            for (ServerWorld world : integratedServer.getWorlds()) {
+                IServerWorldInfo worldInfo = (IServerWorldInfo) (world.getWorldInfo());
+                worldInfo.setDayTime(0);
             }
         }
     }

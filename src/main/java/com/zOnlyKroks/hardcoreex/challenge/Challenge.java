@@ -41,18 +41,26 @@ public abstract class Challenge implements IChallengeProvider, IForgeRegistryEnt
         return this;
     }
 
-    public void enable() {
+    public final void enable() {
         MinecraftForge.EVENT_BUS.register(this);
         this.enabled = true;
         this.configSpec.set(true);
         this.configSpec.save();
     }
 
-    public void disable() {
+    public final void disable() {
         MinecraftForge.EVENT_BUS.unregister(this);
         this.enabled = false;
         this.configSpec.set(false);
         this.configSpec.save();
+    }
+
+    public void onEnable() {
+
+    }
+
+    public void onDisable() {
+
     }
 
     /**
@@ -115,7 +123,7 @@ public abstract class Challenge implements IChallengeProvider, IForgeRegistryEnt
         if (getRegistryName() != null) {
             return new TranslationTextComponent("challenge." + 
                     getRegistryName().getNamespace() + "." + 
-                    getRegistryName().getPath().replaceAll("/", ".") + ".name");
+                    getRegistryName().getPath().replaceAll("/", "."));
         } else {
             throw new NullPointerException("Registry name is null.");
         }

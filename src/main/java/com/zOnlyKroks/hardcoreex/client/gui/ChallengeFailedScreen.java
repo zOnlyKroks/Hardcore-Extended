@@ -75,6 +75,18 @@ public class ChallengeFailedScreen extends Screen {
         this.buttons.clear();
         this.children.clear();
 
+        if (this.minecraft.player == null) {
+            throw new NullPointerException("Client player is null!");
+        }
+
+        if (!this.minecraft.isIntegratedServerRunning()) {
+            throw new IllegalStateException("Integrated server isn't running.");
+        }
+
+        if (this.minecraft.getIntegratedServer() == null) {
+            throw new NullPointerException("Integrated server is null!");
+        }
+
         // Add button for respawn.
         this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 72, 200, 20, new TranslationTextComponent("deathScreen.spectate"), (p_213021_1_) -> {
             // Respawn player.
@@ -82,13 +94,26 @@ public class ChallengeFailedScreen extends Screen {
                 throw new IllegalStateException("Expected to have integrated server running!");
             }
 
-            Objects.requireNonNull(this.minecraft.player).respawnPlayer();
-            Objects.requireNonNull(this.minecraft.getIntegratedServer()).setGameType(GameType.SPECTATOR);
+            if (this.minecraft.player == null) {
+                throw new NullPointerException("Client player is null!");
+            }
+
+            if (!this.minecraft.isIntegratedServerRunning()) {
+                throw new IllegalStateException("Integrated server isn't running.");
+            }
+
+            if (this.minecraft.getIntegratedServer() == null) {
+                throw new NullPointerException("Integrated server is null!");
+            }
+            this.minecraft.player.setGameType(GameType.SPECTATOR);
+            this.minecraft.player.respawnPlayer();
+            this.minecraft.getIntegratedServer().setGameType(GameType.SPECTATOR);
+            this.minecraft.player.setGameType(GameType.SPECTATOR);
 
             // Close screen.
             this.minecraft.displayGuiScreen(null);
         }));
-        this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslationTextComponent("hardcoreex.delete_world.delete"), (p_213020_1_) -> {
+        this.addButton(new Button(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslationTextComponent("hardcoreex.failed_challenge.delete"), (p_213020_1_) -> {
             // Delete world.
             this.unloadAndDeleteWorld();
         }));

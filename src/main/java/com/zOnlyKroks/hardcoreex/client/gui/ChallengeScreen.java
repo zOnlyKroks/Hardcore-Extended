@@ -67,12 +67,12 @@ public class ChallengeScreen extends Screen {
       assert this.minecraft != null;
       
       // Create the left screen.
-      this.leftScreen = new ChallengeList(this.minecraft, 200, this.height, new TranslationTextComponent("pack.available.title"));
+      this.leftScreen = new ChallengeList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.available.title"));
       this.leftScreen.setLeftPos(this.width / 2 - 4 - 200);
       this.children.add(this.leftScreen);
       
       // Create the right screen.
-      this.rightScreen = new ChallengeList(this.minecraft, 200, this.height, new TranslationTextComponent("pack.selected.title"));
+      this.rightScreen = new ChallengeList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.selected.title"));
       this.rightScreen.setLeftPos(this.width / 2 + 4);
       this.children.add(this.rightScreen);
 
@@ -87,7 +87,7 @@ public class ChallengeScreen extends Screen {
 //      }
 //   }
 
-   private void reload() {
+   public void reload() {
       // Reloading challenges.
       this.challenges = new ArrayList<>(GameRegistry.findRegistry(Challenge.class).getValues());
 
@@ -110,7 +110,7 @@ public class ChallengeScreen extends Screen {
       }
    }
 
-   private void reloadAll() {
+   public void reloadAll() {
       this.reload();
 //      this.field_243393_t = 0L;
 //      this.field_243394_y.clear();

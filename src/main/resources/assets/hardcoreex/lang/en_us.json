@@ -1,6 +1,7 @@
 {
-  "hardcoreex.delete_world.title": "You Died in a No Damage Challenge!",
-  "hardcoreex.delete_world.delete": "Delete World",
+  "hardcoreex.failed_challenge.title": "You failed the %s challenge!",
+  "hardcoreex.failed_challenge.delete": "Delete World",
 
-  "challenge.hardcoreex.no_damage.name": "No Damage"
+  "challenge.hardcoreex.no_damage": "No Damage",
+  "challenge.hardcoreex.no_day": "Night Only"
 }

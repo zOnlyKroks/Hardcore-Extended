@@ -3,6 +3,7 @@ package com.zOnlyKroks.hardcoreex.init;
 import com.zOnlyKroks.hardcoreex.HardcoreExtended;
 import com.zOnlyKroks.hardcoreex.challenge.Challenge;
 import com.zOnlyKroks.hardcoreex.challenge.NoDamageChallenge;
+import com.zOnlyKroks.hardcoreex.challenge.NoDayChallenge;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,4 +18,5 @@ public class ModChallenges {
     }
 
     public static final RegistryObject<NoDamageChallenge> NO_DAMAGE = CHALLENGES.register("no_damage", NoDamageChallenge::new);
+    public static final RegistryObject<NoDayChallenge> NO_DAY = CHALLENGES.register("no_day", NoDayChallenge::new);
 }

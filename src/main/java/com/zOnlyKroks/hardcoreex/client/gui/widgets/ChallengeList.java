@@ -3,6 +3,7 @@ package com.zOnlyKroks.hardcoreex.client.gui.widgets;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.zOnlyKroks.hardcoreex.challenge.Challenge;
+import com.zOnlyKroks.hardcoreex.client.gui.ChallengeScreen;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -32,6 +33,7 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
    private static final ITextComponent INCOMPATIBLE_TEXT = new TranslationTextComponent("challenges.incompatible");
    private static final ITextComponent INCOMPATIBLE_CONFIRM_TITLE = new TranslationTextComponent("challenges.incompatible.confirm.title");
    private final ITextComponent title;
+   private final ChallengeScreen screen;
 
    /**
     * Constructor for the challenge list widget.
@@ -41,8 +43,9 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
     * @param heightIn the list's height.
     * @param title the list title.
     */
-   public ChallengeList(Minecraft minecraft, int widthIn, int heightIn, ITextComponent title) {
+   public ChallengeList(ChallengeScreen screen, Minecraft minecraft, int widthIn, int heightIn, ITextComponent title) {
       super(minecraft, widthIn, heightIn, 32, heightIn - 55 + 4, 36);
+      this.screen = screen;
       this.title = title;
       this.centerListVertically = false;
       this.setRenderHeader(true, (int)(9.0F * 1.5F));
@@ -72,27 +75,56 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
       // Todo: allow creation of custom challenges.
 //      private final IReorderingProcessor reorderingIncompatible;
 
-      public ChallengeEntry(Minecraft p_i241201_1_, ChallengeList p_i241201_2_, Screen p_i241201_3_, Challenge p_i241201_4_) {
-         this.mc = p_i241201_1_;
-         this.screen = p_i241201_3_;
-         this.challenge = p_i241201_4_;
-         this.list = p_i241201_2_;
-         this.reorderingLocalizedName = func_244424_a(p_i241201_1_, p_i241201_4_.getLocalizedName());
+      /**
+       * Challenge list entry.
+       *
+       * @param minecraft the minecraft instance.
+       * @param list the challenge list.
+       * @param screen a screen.
+       * @param challenge the challenge to hold in the entry,
+       */
+      public ChallengeEntry(Minecraft minecraft, ChallengeList list, Screen screen, Challenge challenge) {
+         this.mc = minecraft;
+         this.screen = screen;
+         this.challenge = challenge;
+         this.list = list;
+         this.reorderingLocalizedName = getReordering(minecraft, challenge.getLocalizedName());
 
          // Todo: allow creation of custom challenges.
 //         this.reorderingIncompatible = func_244424_a(p_i241201_1_, ChallengeList.INCOMPATIBLE_TEXT);
       }
 
-      private static IReorderingProcessor func_244424_a(Minecraft p_244424_0_, ITextComponent p_244424_1_) {
-         int i = p_244424_0_.fontRenderer.getStringPropertyWidth(p_244424_1_);
+      /**
+       * Get reordering processor from a text component.
+       *
+       * @param minecraft the minecraft instance.
+       * @param text the text component to process.
+       * @return a {@link IReorderingProcessor reordering processor}.
+       */
+      private static IReorderingProcessor getReordering(Minecraft minecraft, ITextComponent text) {
+         int i = minecraft.fontRenderer.getStringPropertyWidth(text);
          if (i > 157) {
-            ITextProperties itextproperties = ITextProperties.func_240655_a_(p_244424_0_.fontRenderer.func_238417_a_(p_244424_1_, 157 - p_244424_0_.fontRenderer.getStringWidth("...")), ITextProperties.func_240652_a_("..."));
+            ITextProperties itextproperties = ITextProperties.func_240655_a_(minecraft.fontRenderer.func_238417_a_(text, 157 - minecraft.fontRenderer.getStringWidth("...")), ITextProperties.func_240652_a_("..."));
             return LanguageMap.getInstance().func_241870_a(itextproperties);
          } else {
-            return p_244424_1_.func_241878_f();
+            return text.func_241878_f();
          }
       }
 
+      /**
+       * Renders the challenge list entry.
+       *
+       * @param matrixStack the matrix-stack for rendering.
+       * @param unknown1 ...
+       * @param subY delta y in the list.
+       * @param subX delta x in the list.
+       * @param unknown2 ...
+       * @param unknown3 ...
+       * @param mouseX real mouse x coordinate.
+       * @param mouseY real mouse y coordinate.
+       * @param p_230432_9_ ...
+       * @param partialTicks the {@link Minecraft#getRenderPartialTicks() render partial ticks}.
+       */
       @SuppressWarnings({"CommentedOutCode", "SpellCheckingInspection"})
       public void render(MatrixStack matrixStack, int unknown1, int subY, int subX, int unknown2, int unknown3, int mouseX, int mouseY, boolean p_230432_9_, float partialTicks) {
          // Todo: allow creation of custom challenges.
@@ -170,12 +202,15 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
                   }, ChallengeList.INCOMPATIBLE_CONFIRM_TITLE, itextcomponent));
                }
 
+               this.list.screen.reloadAll();
+
                return true;
             }
 
             if (deltaX < 16.0D && this.challenge.isEnabled()
             ) {
                this.challenge.disable();
+               this.list.screen.reloadAll();
                return true;
             }
          }
