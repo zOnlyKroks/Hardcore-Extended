@@ -31,7 +31,6 @@ public class NoHealingChallenge extends Challenge{
             event.setCanceled(true);
     }
 
-
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event) {
