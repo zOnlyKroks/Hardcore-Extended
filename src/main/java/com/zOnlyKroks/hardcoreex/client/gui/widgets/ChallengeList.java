@@ -3,6 +3,7 @@ package com.zOnlyKroks.hardcoreex.client.gui.widgets;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.zOnlyKroks.hardcoreex.HardcoreExtended;
 import com.zOnlyKroks.hardcoreex.challenge.Challenge;
 import com.zOnlyKroks.hardcoreex.client.gui.ChallengeScreen;
 import mcp.MethodsReturnNonnullByDefault;
@@ -34,6 +35,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @OnlyIn(Dist.CLIENT)
 public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
    private static final ResourceLocation ICONS = new ResourceLocation("textures/gui/resource_packs.png");
+   private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(HardcoreExtended.MOD_ID, "textures/empty.png");
    private static final ITextComponent INCOMPATIBLE_TEXT = new TranslationTextComponent("challenges.incompatible");
    private static final ITextComponent INCOMPATIBLE_CONFIRM_TITLE = new TranslationTextComponent("challenges.incompatible.confirm.title");
    private final ITextComponent title;
@@ -67,7 +69,7 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
       Tessellator tessellator = Tessellator.getInstance();
       BufferBuilder bufferbuilder = tessellator.getBuffer();
       if (this.field_244603_t) {
-         this.minecraft.getTextureManager().bindTexture(AbstractGui.BACKGROUND_LOCATION);
+         this.minecraft.getTextureManager().bindTexture(ChallengeList.BACKGROUND_LOCATION);
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          float f = 32.0F;
          bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
@@ -86,7 +88,7 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
 
       this.renderList(matrixStack, j1, k, mouseX, mouseY, partialTicks);
       if (this.field_244604_u) {
-         this.minecraft.getTextureManager().bindTexture(AbstractGui.BACKGROUND_LOCATION);
+         this.minecraft.getTextureManager().bindTexture(ChallengeList.BACKGROUND_LOCATION);
          RenderSystem.enableDepthTest();
          RenderSystem.depthFunc(519);
          float f1 = 32.0F;
