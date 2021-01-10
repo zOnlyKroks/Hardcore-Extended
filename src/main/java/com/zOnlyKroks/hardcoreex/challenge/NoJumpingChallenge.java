@@ -45,7 +45,7 @@ public class NoJumpingChallenge extends Challenge{
             double x = player.getMotion().x;
             double z = player.getMotion().z;
 
-            player.setMotion(x,0,z);
+            player.setMotion(x,-0.1,z);
         } else{
             HardcoreExtended.LOGGER.debug("No Jumping Challange not activated. Activate it in the config if this is not intentional");
         }
