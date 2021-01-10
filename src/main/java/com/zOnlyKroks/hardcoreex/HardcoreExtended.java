@@ -2,6 +2,7 @@ package com.zOnlyKroks.hardcoreex;
 
 import com.zOnlyKroks.hardcoreex.challenge.Challenge;
 import com.zOnlyKroks.hardcoreex.config.Config;
+import com.zOnlyKroks.hardcoreex.event.PlayerJoinWorldEvent;
 import com.zOnlyKroks.hardcoreex.init.ModChallenges;
 import com.zOnlyKroks.hardcoreex.init.ModItems;
 import net.minecraft.item.ItemGroup;
@@ -40,26 +41,22 @@ public class HardcoreExtended {
      * HardcoreExtended constructor.
      */
     public HardcoreExtended() {
-        // Get mod event bus.
+
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Add listener for common setup.
+
         modEventBus.addListener(this::setup);
 
-        // Load configurations.
+
         Config.init();
-//        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-client.toml").toString());
-//        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("hardcoreex-server.toml").toString());
 
-        // Create registry for challenges.
-//        CHALLENGES_REGISTRY = registry;
+        MinecraftForge.EVENT_BUS.register(PlayerJoinWorldEvent.class);
 
-        // Register event bus to item deferred register, so the items will be registered.
+
         ModItems.ITEMS.register(modEventBus);
         ModChallenges.CHALLENGES.register(modEventBus);
-//        ModChallenges.init();
 
-        // Register HardcoreExtended mod to the forge event bus.
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -72,18 +69,6 @@ public class HardcoreExtended {
 
     }
 
-//    /**
-//     * Note: this uses deprecated API. Don't know why...
-//     *
-//     * @param event the {@link FMLFingerprintViolationEvent FML Fingerprint Violation Event}.
-//     */
-//    @SuppressWarnings("deprecation")
-//    @SubscribeEvent
-//    public void onFingerprintViolation(final FMLFingerprintViolationEvent event) {
-//        LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName()
-//                + " may have been tampered with. This version will NOT be supported by the author!");
-//        LOGGER.warn("Expected " + event.getExpectedFingerprint() + " found " + event.getFingerprints().toString());
-//    }
 
     /**
      * Main item group for the Hardcore Extended Mod.
