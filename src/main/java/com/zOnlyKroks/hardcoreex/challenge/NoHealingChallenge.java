@@ -10,6 +10,12 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+/**
+ * No healing challenge.
+ * Stops the player being healed.
+ *
+ * @author zOnlyKroks
+ */
 public class NoHealingChallenge extends Challenge{
     public NoHealingChallenge() {
         super(ConfigBuilder.no_healing_challange);
@@ -22,7 +28,7 @@ public class NoHealingChallenge extends Challenge{
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void playerRegen(LivingHealEvent event) {
+    public static void onPlayerHeal(LivingHealEvent event) {
         if (ConfigBuilder.no_healing_challange.get()) {
             if (event.getEntity() instanceof PlayerEntity) {
                 event.setCanceled(true);

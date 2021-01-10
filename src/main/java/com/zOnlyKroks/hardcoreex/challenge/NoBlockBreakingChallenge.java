@@ -22,7 +22,7 @@ public class NoBlockBreakingChallenge extends Challenge{
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void blockBreakEvent(BlockEvent.BreakEvent event) {
+    public void onBlockBreak(BlockEvent.BreakEvent event) {
         if(ConfigBuilder.no_block_breaking_challange.get()) {
             if(event.getPlayer() != null) {
                 event.setCanceled(true);

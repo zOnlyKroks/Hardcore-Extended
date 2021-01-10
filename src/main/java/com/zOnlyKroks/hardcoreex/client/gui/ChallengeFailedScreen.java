@@ -12,8 +12,10 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.util.text.*;
-import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.GameType;
 import net.minecraft.world.storage.SaveFormat;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,7 +23,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public class ChallengeFailedScreen extends Screen {
     /**
      * The integer value containing the number of ticks that have passed since the player's death
      */
-    private final ITextComponent failedCause;
+//    private final ITextComponent failedCause;
     private ITextComponent scoreText;
 
     /**
@@ -47,11 +48,11 @@ public class ChallengeFailedScreen extends Screen {
      * @param challenge the failed challenge.
      */
     public ChallengeFailedScreen(Challenge challenge) {
-        super(new TranslationTextComponent("hardcoreex.failed_challenge.title"));
+        super(new TranslationTextComponent("hardcoreex.failed_challenge.title", challenge.getLocalizedName()));
         
         // Assign variables.
         this.challenge = challenge;
-        this.failedCause = new TranslationTextComponent("hardcoreex.failed_challenge.message", challenge.getLocalizedName());
+//        this.failedCause = new TranslationTextComponent("hardcoreex.failed_challenge.message");
     }
 
     /**
@@ -182,62 +183,12 @@ public class ChallengeFailedScreen extends Screen {
         
         // Pop the matrix, used to revert the scaling for objects after this. So the buttons will not be scaled.
         RenderSystem.popMatrix();
-        
-        // Check if the cause of death isn't nothing.
-        if (this.failedCause != null) {
-            // Draw a string representing the cause of death.
-            drawCenteredString(matrixStack, this.font, this.failedCause, this.width / 2, 85, 16777215);
-        }
 
         // Draw the score information.
         drawCenteredString(matrixStack, this.font, this.scoreText, this.width / 2, 100, 16777215);
-        
-        // Not really know what this does, but it's in the death screen.
-        if (this.failedCause != null && mouseY > 85 && mouseY < 85 + 9) {
-            Style style = this.getStyle(mouseX);
-            this.renderComponentHoverEffect(matrixStack, style, mouseX, mouseY);
-        }
 
         // Call super method.
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-    }
-
-    /**
-     * This method is obfuscated, I don't really know what's happening in this method, but it was in the
-     * 
-     * @param mouseX x position of the mouse.
-     * @return the requested hover effect.
-     */
-    @Nullable
-    private Style getStyle(int mouseX) {
-        if (this.failedCause == null) {
-            return null;
-        } else {
-            int i = Objects.requireNonNull(this.minecraft).fontRenderer.getStringPropertyWidth(this.failedCause);
-            int j = this.width / 2 - i / 2;
-            int k = this.width / 2 + i / 2;
-            return mouseX >= j && mouseX <= k ? this.minecraft.fontRenderer.getCharacterManager().func_238357_a_(this.failedCause, mouseX - j) : null;
-        }
-    }
-
-    /**
-     * Mouse clicked event.
-     * 
-     * @param mouseX the mouse x position.
-     * @param mouseY the mouse y position.
-     * @param button the mouse button index clicked.
-     * @return something what looks like a flag.
-     */
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (this.failedCause != null && mouseY > 85.0D && mouseY < (double)(85 + 9)) {
-            Style style = this.getStyle((int)mouseX);
-            if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
-                this.handleComponentClicked(style);
-                return false;
-            }
-        }
-
-        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     /**

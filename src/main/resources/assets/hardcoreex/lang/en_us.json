@@ -3,5 +3,6 @@
   "hardcoreex.failed_challenge.delete": "Delete World",
 
   "challenge.hardcoreex.no_damage": "No Damage",
-  "challenge.hardcoreex.no_day": "Night Only"
+  "challenge.hardcoreex.no_day": "Night Only",
+  "challenge.hardcoreex.no_walking": "No Walking"
 }

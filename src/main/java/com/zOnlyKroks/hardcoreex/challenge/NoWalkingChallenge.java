@@ -3,35 +3,41 @@ package com.zOnlyKroks.hardcoreex.challenge;
 import com.zOnlyKroks.hardcoreex.HardcoreExtended;
 import com.zOnlyKroks.hardcoreex.config.ConfigBuilder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class NoSprintChallenge extends Challenge{
+/**
+ * No jumping challenge
+ * Stops the player able to jump.
+ *
+ * @author zOnlyKroks, Qboi123
+ */
+public class NoWalkingChallenge extends Challenge{
 
-    public NoSprintChallenge() {
-        super(ConfigBuilder.no_sprinting_challange);
+    public NoWalkingChallenge() {
+        super(ConfigBuilder.no_jumping_challange);
     }
 
     @Override
     protected void tick() {
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(ConfigBuilder.no_sprinting_challange.get()) {
-            if (event.player != null) {
-                if (event.player.isSprinting()) {
-                    event.player.setSprinting(false);
+    public void onPlayerMotion(TickEvent.PlayerTickEvent event) {
+        if (ConfigBuilder.no_jumping_challange.get()) {
+            PlayerEntity player = event.player;
 
-                    this.failChallenge();
-                }
-            }
-        }else{
-            HardcoreExtended.LOGGER.debug("No Sprinting Challange not activated. Activate it in the config if this is not intentional");
+            double y = player.getMotion().y;
+            player.setMotion(0,y,0); // Set motion downwards if already was in air.
+        } else{
+            HardcoreExtended.LOGGER.debug("No Jumping Challange not activated. Activate it in the config if this is not intentional");
         }
     }
 

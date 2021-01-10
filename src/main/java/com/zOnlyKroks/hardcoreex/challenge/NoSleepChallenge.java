@@ -38,7 +38,7 @@ public class NoSleepChallenge extends Challenge{
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void blockBreakEvent(PlayerSleepInBedEvent event) {
+    public void onPlayerSleep(PlayerSleepInBedEvent event) {
         if(ConfigBuilder.no_sleep_challange.get()) {
             if (event.getPlayer() != null) {
                 event.setCanceled(true);

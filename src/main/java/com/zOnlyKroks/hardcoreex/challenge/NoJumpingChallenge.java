@@ -10,6 +10,12 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+/**
+ * No jumping challenge
+ * Stops the player able to jump.
+ *
+ * @author zOnlyKroks, Qboi123
+ */
 public class NoJumpingChallenge extends Challenge{
 
     public NoJumpingChallenge() {
@@ -18,6 +24,21 @@ public class NoJumpingChallenge extends Challenge{
 
     @Override
     protected void tick() {
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void playerJump(LivingEvent.LivingJumpEvent event) {
+        if (ConfigBuilder.no_jumping_challange.get()) {
+            Entity player = event.getEntity();
+
+            double x = player.getMotion().x;
+            double z = player.getMotion().z;
+
+            player.setMotion(x,-0.1,z); // Set motion downwards if already was in air.
+        } else{
+            HardcoreExtended.LOGGER.debug("No Jumping Challange not activated. Activate it in the config if this is not intentional");
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -33,21 +54,6 @@ public class NoJumpingChallenge extends Challenge{
                 // Fail challenge.
                 this.failChallenge();
             }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public static void playerJump(LivingEvent.LivingJumpEvent event) {
-        if (ConfigBuilder.no_jumping_challange.get()) {
-            Entity player = event.getEntity();
-
-            double x = player.getMotion().x;
-            double z = player.getMotion().z;
-
-            player.setMotion(x,-0.1,z);
-        } else{
-            HardcoreExtended.LOGGER.debug("No Jumping Challange not activated. Activate it in the config if this is not intentional");
         }
     }
 }
