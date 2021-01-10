@@ -1,6 +1,7 @@
 package com.zOnlyKroks.hardcoreex.client.gui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.zOnlyKroks.hardcoreex.challenge.Challenge;
 import com.zOnlyKroks.hardcoreex.client.gui.ChallengeScreen;
@@ -10,9 +11,12 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.list.ExtendedList;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * 
  * @author Qboi123
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @OnlyIn(Dist.CLIENT)
@@ -54,6 +58,100 @@ public class ChallengeList extends ExtendedList<ChallengeList.ChallengeEntry> {
    protected void renderHeader(MatrixStack p_230448_1_, int p_230448_2_, int p_230448_3_, Tessellator p_230448_4_) {
       ITextComponent itextcomponent = (new StringTextComponent("")).append(this.title).mergeStyle(TextFormatting.UNDERLINE, TextFormatting.BOLD);
       this.minecraft.fontRenderer.func_243248_b(p_230448_1_, itextcomponent, (float)(p_230448_2_ + this.width / 2 - this.minecraft.fontRenderer.getStringPropertyWidth(itextcomponent) / 2), (float)Math.min(this.y0 + 3, p_230448_3_), 16777215);
+   }
+
+   @Override
+   public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+      int i = this.getScrollbarPosition();
+      int j = i + 6;
+      Tessellator tessellator = Tessellator.getInstance();
+      BufferBuilder bufferbuilder = tessellator.getBuffer();
+      if (this.field_244603_t) {
+         this.minecraft.getTextureManager().bindTexture(AbstractGui.BACKGROUND_LOCATION);
+         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+         float f = 32.0F;
+         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+         bufferbuilder.pos(this.x0, this.y1, 0.0D).tex((float)this.x0 / 32.0F, (float)(this.y1 + (int)this.getScrollAmount()) / 32.0F).color(32, 32, 32, 255).endVertex();
+         bufferbuilder.pos(this.x1, this.y1, 0.0D).tex((float)this.x1 / 32.0F, (float)(this.y1 + (int)this.getScrollAmount()) / 32.0F).color(32, 32, 32, 255).endVertex();
+         bufferbuilder.pos(this.x1, this.y0, 0.0D).tex((float)this.x1 / 32.0F, (float)(this.y0 + (int)this.getScrollAmount()) / 32.0F).color(32, 32, 32, 255).endVertex();
+         bufferbuilder.pos(this.x0, this.y0, 0.0D).tex((float)this.x0 / 32.0F, (float)(this.y0 + (int)this.getScrollAmount()) / 32.0F).color(32, 32, 32, 255).endVertex();
+         tessellator.draw();
+      }
+
+      int j1 = this.getRowLeft();
+      int k = this.y0 + 4 - (int)this.getScrollAmount();
+      if (this.renderHeader) {
+         this.renderHeader(matrixStack, j1, k, tessellator);
+      }
+
+      this.renderList(matrixStack, j1, k, mouseX, mouseY, partialTicks);
+      if (this.field_244604_u) {
+         this.minecraft.getTextureManager().bindTexture(AbstractGui.BACKGROUND_LOCATION);
+         RenderSystem.enableDepthTest();
+         RenderSystem.depthFunc(519);
+         float f1 = 32.0F;
+         int l = -100;
+         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+         bufferbuilder.pos(this.x0, this.y0, -100.0D).tex(0.0F, (float)this.y0 / 32.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0 + this.width, this.y0, -100.0D).tex((float)this.width / 32.0F, (float)this.y0 / 32.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0 + this.width, 0.0D, -100.0D).tex((float)this.width / 32.0F, 0.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0, 0.0D, -100.0D).tex(0.0F, 0.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0, this.height, -100.0D).tex(0.0F, (float)this.height / 32.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0 + this.width, this.height, -100.0D).tex((float)this.width / 32.0F, (float)this.height / 32.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0 + this.width, this.y1, -100.0D).tex((float)this.width / 32.0F, (float)this.y1 / 32.0F).color(64, 64, 64, 255).endVertex();
+         bufferbuilder.pos(this.x0, this.y1, -100.0D).tex(0.0F, (float)this.y1 / 32.0F).color(64, 64, 64, 255).endVertex();
+         tessellator.draw();
+         RenderSystem.depthFunc(515);
+         RenderSystem.disableDepthTest();
+         RenderSystem.enableBlend();
+         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE);
+         RenderSystem.disableAlphaTest();
+         RenderSystem.shadeModel(7425);
+         RenderSystem.disableTexture();
+         int i1 = 4;
+         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+         bufferbuilder.pos(this.x0, this.y0 + 4, 0.0D).tex(0.0F, 1.0F).color(0, 0, 0, 0).endVertex();
+         bufferbuilder.pos(this.x1, this.y0 + 4, 0.0D).tex(1.0F, 1.0F).color(0, 0, 0, 0).endVertex();
+         bufferbuilder.pos(this.x1, this.y0, 0.0D).tex(1.0F, 0.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(this.x0, this.y0, 0.0D).tex(0.0F, 0.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(this.x0, this.y1, 0.0D).tex(0.0F, 1.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(this.x1, this.y1, 0.0D).tex(1.0F, 1.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(this.x1, this.y1 - 4, 0.0D).tex(1.0F, 0.0F).color(0, 0, 0, 0).endVertex();
+         bufferbuilder.pos(this.x0, this.y1 - 4, 0.0D).tex(0.0F, 0.0F).color(0, 0, 0, 0).endVertex();
+         tessellator.draw();
+      }
+
+      int k1 = this.getMaxScroll();
+      if (k1 > 0) {
+         RenderSystem.disableTexture();
+         int l1 = (int)((float)((this.y1 - this.y0) * (this.y1 - this.y0)) / (float)this.getMaxPosition());
+         l1 = MathHelper.clamp(l1, 32, this.y1 - this.y0 - 8);
+         int i2 = (int)this.getScrollAmount() * (this.y1 - this.y0 - l1) / k1 + this.y0;
+         if (i2 < this.y0) {
+            i2 = this.y0;
+         }
+
+         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+         bufferbuilder.pos(i, this.y1, 0.0D).tex(0.0F, 1.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(j, this.y1, 0.0D).tex(1.0F, 1.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(j, this.y0, 0.0D).tex(1.0F, 0.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(i, this.y0, 0.0D).tex(0.0F, 0.0F).color(0, 0, 0, 255).endVertex();
+         bufferbuilder.pos(i, i2 + l1, 0.0D).tex(0.0F, 1.0F).color(128, 128, 128, 255).endVertex();
+         bufferbuilder.pos(j, i2 + l1, 0.0D).tex(1.0F, 1.0F).color(128, 128, 128, 255).endVertex();
+         bufferbuilder.pos(j, i2, 0.0D).tex(1.0F, 0.0F).color(128, 128, 128, 255).endVertex();
+         bufferbuilder.pos(i, i2, 0.0D).tex(0.0F, 0.0F).color(128, 128, 128, 255).endVertex();
+         bufferbuilder.pos(i, i2 + l1 - 1, 0.0D).tex(0.0F, 1.0F).color(192, 192, 192, 255).endVertex();
+         bufferbuilder.pos(j - 1, i2 + l1 - 1, 0.0D).tex(1.0F, 1.0F).color(192, 192, 192, 255).endVertex();
+         bufferbuilder.pos(j - 1, i2, 0.0D).tex(1.0F, 0.0F).color(192, 192, 192, 255).endVertex();
+         bufferbuilder.pos(i, i2, 0.0D).tex(0.0F, 0.0F).color(192, 192, 192, 255).endVertex();
+         tessellator.draw();
+      }
+
+      this.renderDecorations(matrixStack, mouseX, mouseY);
+      RenderSystem.enableTexture();
+      RenderSystem.shadeModel(7424);
+      RenderSystem.enableAlphaTest();
+      RenderSystem.disableBlend();
    }
 
    public int getRowWidth() {

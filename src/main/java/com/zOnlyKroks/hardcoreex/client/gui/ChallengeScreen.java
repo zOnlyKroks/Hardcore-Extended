@@ -117,7 +117,8 @@ public class ChallengeScreen extends Screen {
    }
 
    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-      this.renderDirtBackground(0);
+//      this.renderDirtBackground(0);
+      this.renderBackground(matrixStack);
 
       // Render lists.
       this.leftScreen.render(matrixStack, mouseX, mouseY, partialTicks);

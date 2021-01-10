@@ -4,5 +4,10 @@
 
   "challenge.hardcoreex.no_damage": "No Damage",
   "challenge.hardcoreex.no_day": "Night Only",
-  "challenge.hardcoreex.no_walking": "No Walking"
+  "challenge.hardcoreex.no_walking": "No Walking",
+  "challenge.hardcoreex.no_jumping": "No Jumping",
+  "challenge.hardcoreex.no_sprint": "No Sprinting",
+  "challenge.hardcoreex.no_healing": "No Healing",
+  "challenge.hardcoreex.no_sleep": "No Sleeping",
+  "challenge.hardcoreex.no_block_breaking": "No Block Breaking"
 }

@@ -4,5 +4,10 @@
 
   "challenge.hardcoreex.no_damage": "Geen schade",
   "challenge.hardcoreex.no_day": "Alleen nacht",
-  "challenge.hardcoreex.no_walking": "Niet lopen"
+  "challenge.hardcoreex.no_walking": "Zonder lopen",
+  "challenge.hardcoreex.no_jumping": "Zonder springen",
+  "challenge.hardcoreex.no_sprint": "Zonder rennen",
+  "challenge.hardcoreex.no_healing": "Geen genezing",
+  "challenge.hardcoreex.no_sleep": "Zonder slapen",
+  "challenge.hardcoreex.no_block_breaking": "Geen blokken breken"
 }
