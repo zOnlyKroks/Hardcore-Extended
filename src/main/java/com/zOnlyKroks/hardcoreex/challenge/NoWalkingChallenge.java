@@ -31,14 +31,10 @@ public class NoWalkingChallenge extends Challenge{
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onPlayerMotion(TickEvent.PlayerTickEvent event) {
-        if (ConfigBuilder.no_jumping_challange.get()) {
             PlayerEntity player = event.player;
-
             double y = player.getMotion().y;
             player.setMotion(0,y,0); // Set motion downwards if already was in air.
-        } else{
-            HardcoreExtended.LOGGER.debug("No Jumping Challange not activated. Activate it in the config if this is not intentional");
-        }
+
     }
 
     @OnlyIn(Dist.CLIENT)

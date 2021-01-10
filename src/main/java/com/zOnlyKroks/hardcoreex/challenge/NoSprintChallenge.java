@@ -22,16 +22,10 @@ public class NoSprintChallenge extends Challenge{
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(ConfigBuilder.no_sprinting_challange.get()) {
-            if (event.player != null) {
-                if (event.player.isSprinting()) {
-                    event.player.setSprinting(false);
-
-                    this.failChallenge();
-                }
+        if (event.player != null) {
+            if (event.player.isSprinting()) {
+                event.player.setSprinting(false);
             }
-        }else{
-            HardcoreExtended.LOGGER.debug("No Sprinting Challange not activated. Activate it in the config if this is not intentional");
         }
     }
 

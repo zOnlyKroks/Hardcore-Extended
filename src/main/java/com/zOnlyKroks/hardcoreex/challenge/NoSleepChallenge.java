@@ -39,12 +39,8 @@ public class NoSleepChallenge extends Challenge{
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onPlayerSleep(PlayerSleepInBedEvent event) {
-        if(ConfigBuilder.no_sleep_challange.get()) {
-            if (event.getPlayer() != null) {
-                event.setCanceled(true);
-            }
-        }else{
-            HardcoreExtended.LOGGER.debug("No Sleep Challange not activated. Activate it in the config if this is not intentional");
+        if (event.getPlayer() != null) {
+            event.setCanceled(true);
         }
     }
 }
