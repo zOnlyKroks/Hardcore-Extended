@@ -1,4 +1,7 @@
 {
   "hardcoreex.failed_challenge.title": "Du bist ein einer kein Schaden Challange gestorben!",
-  "hardcoreex.failed_challenge.delete": "Welt löschen"
+  "hardcoreex.failed_challenge.delete": "Welt löschen",
+
+  "challenge.hardcoreex.no_damage": "Kein Schaden",
+  "challenge.hardcoreex.no_day": "Permanente Nacht"
 }
