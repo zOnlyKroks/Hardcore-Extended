@@ -3,5 +3,10 @@
   "hardcoreex.failed_challenge.delete": "Welt löschen",
 
   "challenge.hardcoreex.no_damage": "Kein Schaden",
-  "challenge.hardcoreex.no_day": "Permanente Nacht"
+  "challenge.hardcoreex.no_day": "Permanente Nacht",
+  "challenge.hardcoreex.no_jumping": "Kein Springen",
+  "challenge.hardcoreex.no_block_breaking": "Keine Blöcke zerstören",
+  "challenge.hardcoreex.no_healing": "Keine Heilung",
+  "challenge.hardcoreex.no_sprint": "Kein Sprinten",
+  "challenge.hardcoreex.no_sleep": "Kein Schlafen"
 }
