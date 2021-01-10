@@ -10,9 +10,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class NoBlockBreackChallenge extends Challenge{
+public class NoBlockBreakingChallenge extends Challenge{
 
-    public NoBlockBreackChallenge() {
+    public NoBlockBreakingChallenge() {
         super(ConfigBuilder.no_block_breaking_challange);
     }
 
