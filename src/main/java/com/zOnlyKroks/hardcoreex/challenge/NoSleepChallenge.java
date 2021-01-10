@@ -22,6 +22,14 @@ public class NoSleepChallenge extends Challenge{
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
+    public void onPlayerSleep(PlayerSleepInBedEvent event) {
+        if (event.getPlayer() != null) {
+            event.setCanceled(true);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
     public void onDeath(LivingDeathEvent event) {
         // Cancel event, we don't want the player to die.
         event.setCanceled(true);
@@ -33,14 +41,6 @@ public class NoSleepChallenge extends Challenge{
                 // Fail challenge.
                 this.failChallenge();
             }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public void onPlayerSleep(PlayerSleepInBedEvent event) {
-        if (event.getPlayer() != null) {
-            event.setCanceled(true);
         }
     }
 }
