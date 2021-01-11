@@ -6,7 +6,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -22,8 +24,24 @@ public class NoAttackingChallenge extends Challenge{
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onLivingAttack(LivingAttackEvent event) {
-        if(event.getEntityLiving() instanceof PlayerEntity) {
+    public void onLivingDamage(LivingDamageEvent event) {
+        if(event.getSource().getTrueSource() instanceof PlayerEntity) {
+            event.setCanceled(true);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event) {
+        if(event.getSource().getTrueSource() instanceof PlayerEntity) {
+            event.setCanceled(true);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void onLivingDeath(LivingDeathEvent event) {
+        if(event.getSource().getTrueSource() instanceof PlayerEntity) {
             event.setCanceled(true);
         }
     }
