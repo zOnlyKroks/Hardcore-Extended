@@ -14,6 +14,7 @@ public class ModChallenges {
         CHALLENGES.makeRegistry("challenges", RegistryBuilder::new);
     }
 
+    public static final RegistryObject<NoAttackingChallenge> NO_ATTACK = CHALLENGES.register("no_attack", NoAttackingChallenge::new);
     public static final RegistryObject<NoDamageChallenge> NO_DAMAGE = CHALLENGES.register("no_damage", NoDamageChallenge::new);
     public static final RegistryObject<NoDayChallenge> NO_DAY = CHALLENGES.register("no_day", NoDayChallenge::new);
     public static final RegistryObject<NoJumpingChallenge> NO_JUMPING = CHALLENGES.register("no_jumping", NoJumpingChallenge::new);
