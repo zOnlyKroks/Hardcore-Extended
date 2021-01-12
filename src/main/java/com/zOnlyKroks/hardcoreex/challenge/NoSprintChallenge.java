@@ -24,6 +24,7 @@ public class NoSprintChallenge extends Challenge{
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.player != null) {
             if (event.player.isSprinting()) {
+                Minecraft.getInstance().gameSettings.keyBindSprint.setPressed(false);
                 event.player.setSprinting(false);
             }
         }
