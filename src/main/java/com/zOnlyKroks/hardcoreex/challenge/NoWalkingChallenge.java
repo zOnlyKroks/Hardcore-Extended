@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class NoWalkingChallenge extends Challenge{
 
     public NoWalkingChallenge() {
-        super(ConfigBuilder.no_jumping_challange);
+        super(ConfigBuilder.no_walking_challange);
     }
 
     @Override

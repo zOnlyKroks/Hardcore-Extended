@@ -11,6 +11,7 @@ public class ConfigBuilder {
     public static ForgeConfigSpec.BooleanValue no_sleep_challange;
     public static ForgeConfigSpec.BooleanValue no_day_challange;
     public static ForgeConfigSpec.BooleanValue no_sprinting_challange;
+    public static ForgeConfigSpec.BooleanValue no_walking_challange;
 
     public static void init(ForgeConfigSpec.Builder server, ForgeConfigSpec.Builder client) {
 
@@ -43,6 +44,10 @@ public class ConfigBuilder {
         no_sprinting_challange = server
                 .comment("Decide if you want the No Sprinting Challange")
                 .define("challanges.no_sprinting_challange", false);
+
+        no_walking_challange = server
+                .comment("Decide if you want the No Walking Challange")
+                .define("challanges.no_walking_challange", false);
 
     }
 
