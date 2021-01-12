@@ -31,10 +31,9 @@ public class NoWalkingChallenge extends Challenge{
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onPlayerMotion(TickEvent.PlayerTickEvent event) {
-            PlayerEntity player = event.player;
-            double y = player.getMotion().y;
-            player.setMotion(0,y,0); // Set motion downwards if already was in air.
-
+        PlayerEntity player = event.player;
+        double y = player.getMotion().y;
+        player.setMotion(0, y, 0);
     }
 
     @OnlyIn(Dist.CLIENT)
