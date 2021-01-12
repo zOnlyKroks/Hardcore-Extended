@@ -1,13 +1,15 @@
 {
-  "hardcoreex.failed_challenge.title": "Du bist in ein einer %s Challange gestorben!",
+  "hardcoreex.failed_challenge.title": "Du hast in der %s Challenge verloten!",
   "hardcoreex.failed_challenge.delete": "Welt löschen",
   "item.hardcoreex.config_item": "Hardcore Extended Config Item",
 
   "challenge.hardcoreex.no_damage": "Kein Schaden",
   "challenge.hardcoreex.no_day": "Permanente Nacht",
+  "challenge.hardcoreex.no_walking": "Kein Laufen",
   "challenge.hardcoreex.no_jumping": "Kein Springen",
-  "challenge.hardcoreex.no_block_breaking": "Keine Blöcke zerstören",
-  "challenge.hardcoreex.no_healing": "Keine Heilung",
   "challenge.hardcoreex.no_sprint": "Kein Sprinten",
-  "challenge.hardcoreex.no_sleep": "Kein Schlafen"
+  "challenge.hardcoreex.no_healing": "Kein Heilen",
+  "challenge.hardcoreex.no_sleep": "Kein Schlafen",
+  "challenge.hardcoreex.no_block_breaking": "Keine Blöcke zerstören",
+  "challenge.hardcoreex.no_attack": "Kein Angreifen"
 }
