@@ -18,9 +18,10 @@ public class ModChallenges {
     public static final RegistryObject<NoDamageChallenge> NO_DAMAGE = CHALLENGES.register("no_damage", NoDamageChallenge::new);
     public static final RegistryObject<NoDayChallenge> NO_DAY = CHALLENGES.register("no_day", NoDayChallenge::new);
     public static final RegistryObject<NoJumpingChallenge> NO_JUMPING = CHALLENGES.register("no_jumping", NoJumpingChallenge::new);
-    public static final RegistryObject<NoWalkingChallenge> NO_WALKING = CHALLENGES.register("no_walking", NoWalkingChallenge::new);
+    //public static final RegistryObject<NoWalkingChallenge> NO_WALKING = CHALLENGES.register("no_walking", NoWalkingChallenge::new);
     public static final RegistryObject<NoBlockBreakingChallenge> NO_BLOCK_BREAKING = CHALLENGES.register("no_block_breaking", NoBlockBreakingChallenge::new);
     public static final RegistryObject<NoHealingChallenge> NO_HEALING = CHALLENGES.register("no_healing", NoHealingChallenge::new);
     public static final RegistryObject<NoSprintChallenge> NO_SPRINT = CHALLENGES.register("no_sprint", NoSprintChallenge::new);
     public static final RegistryObject<NoSleepChallenge> NO_SLEEP = CHALLENGES.register("no_sleep", NoSleepChallenge::new);
+    public static final RegistryObject<FishChallenge> FISH = CHALLENGES.register("fish", FishChallenge::new);
 }
