@@ -41,8 +41,6 @@ public class HardcoreExtended {
         modEventBus.addListener(this::setup);
 
 
-        Config.loadConfig(Config.CLIENT, FMLPaths.CONFIGDIR.get().resolve("maidensmaterials-client.toml").toString());
-        Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("maidensmaterials-server.toml").toString());
         Config.init();
 
 
