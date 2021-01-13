@@ -32,7 +32,9 @@ public class NoWalkingChallenge extends Challenge{
     @SubscribeEvent
     public void onPlayerMotion(TickEvent.PlayerTickEvent event) {
         PlayerEntity player = event.player;
+        double x = -player.getMotion().x;
         double y = player.getMotion().y;
+        double z = -player.getMotion().z;
         player.setMotion(0, y, 0);
     }
 
