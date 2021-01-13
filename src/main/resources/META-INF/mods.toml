@@ -1,31 +1,49 @@
 modLoader="javafml" #mandatory
+
 loaderVersion="[35,)"
+
 license="All rights reserved"
-issueTrackerURL="https://github.com/zOnlyKroks/Hardcore-Extended/issues" #optional
+
+issueTrackerURL="http://my.issue.tracker/" #optional
 
 [[mods]] #mandatory
-modId="hardcoreex" #mandatory
-version="1.0" #mandatory
-displayName="Hardcore Extended" #mandatory
-#updateJSONURL="http://myurl.me/" #optional | This won't work as the url is invalid.
-displayURL="https://www.curseforge.com/minecraft/mc-mods/hardcore-extended" #optional
-logoFile="logo.png" #optional
+
+modId="nodamod" #mandatory
+
+version="0.1" #mandatory
+
+displayName="No Damage Mod" #mandatory
+
+updateJSONURL="http://myurl.me/" #optional
+
+displayURL="http://example.com/" #optional
+
+logoFile="examplemod.png" #optional
+
 credits="To all my suporters" #optional
+
 authors="zOnlyKroks" #optional
+
 description='''
-A Mod wich automates the No Damage Challange
+This Mod deletes your whole Minecraft world if you take damage :)
 '''
 
-[[dependencies.hardcoreex]] #optional
+[[dependencies.nodamod]] #optional
+
     modId="forge" #mandatory
+
     mandatory=true #mandatory
+
     versionRange="[35,)" #mandatory
+
     ordering="NONE"
+
     side="CLIENT"
 
-[[dependencies.hardcoreex]]
+[[dependencies.nodamod]]
     modId="minecraft"
     mandatory=true
+
     versionRange="[1.16.4,1.17)"
     ordering="NONE"
     side="BOTH"
