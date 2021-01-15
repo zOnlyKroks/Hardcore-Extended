@@ -4,6 +4,7 @@ import com.zOnlyKroks.hardcoreex.config.Config;
 import com.zOnlyKroks.hardcoreex.event.PlayerJoinWorldEvent;
 import com.zOnlyKroks.hardcoreex.init.ModChallenges;
 import com.zOnlyKroks.hardcoreex.init.ModItems;
+import com.zOnlyKroks.hardcoreex.render.LayerModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -39,6 +40,7 @@ public class HardcoreExtended {
 
 
         modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::doClientStuff);
 
 
         Config.sync();
@@ -62,6 +64,13 @@ public class HardcoreExtended {
      */
     public void setup(final FMLCommonSetupEvent event) {
 
+    }
+
+    @SubscribeEvent
+    public void doClientStuff(FMLClientSetupEvent event) {
+        Minecraft.getInstance().getRenderManager().getSkinMap().forEach((s, playerRenderer) -> {
+            playerRenderer.addLayer(new LayerModel(playerRenderer));
+        });
     }
 
 
