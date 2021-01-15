@@ -4,7 +4,6 @@ import com.zOnlyKroks.hardcoreex.config.Config;
 import com.zOnlyKroks.hardcoreex.event.PlayerJoinWorldEvent;
 import com.zOnlyKroks.hardcoreex.init.ModChallenges;
 import com.zOnlyKroks.hardcoreex.init.ModItems;
-import com.zOnlyKroks.hardcoreex.render.LayerModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -42,6 +41,7 @@ public class HardcoreExtended {
         modEventBus.addListener(this::setup);
 
 
+        Config.sync();
         Config.init();
 
 
