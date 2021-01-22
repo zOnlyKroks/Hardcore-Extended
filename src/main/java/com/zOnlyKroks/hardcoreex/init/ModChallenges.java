@@ -22,5 +22,5 @@ public class ModChallenges {
     public static final RegistryObject<NoHealingChallenge> NO_HEALING = CHALLENGES.register("no_healing", NoHealingChallenge::new);
     public static final RegistryObject<NoSprintChallenge> NO_SPRINT = CHALLENGES.register("no_sprint", NoSprintChallenge::new);
     public static final RegistryObject<NoSleepChallenge> NO_SLEEP = CHALLENGES.register("no_sleep", NoSleepChallenge::new);
-    //public static final RegistryObject<FishChallenge> ONLY_FISH = CHALLENGES.register("only_fish", FishChallenge::new);
+    public static final RegistryObject<FishChallenge> ONLY_FISH = CHALLENGES.register("only_fish", FishChallenge::new);
 }

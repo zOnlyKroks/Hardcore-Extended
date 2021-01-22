@@ -11,5 +11,6 @@
   "challenge.hardcoreex.no_healing": "No Healing",
   "challenge.hardcoreex.no_sleep": "No Sleeping",
   "challenge.hardcoreex.no_block_breaking": "No Block Breaking",
-  "challenge.hardcoreex.no_attack": "No Attacking"
+  "challenge.hardcoreex.no_attack": "No Attacking",
+  "challenge.hardcoreex.only_fish": "Only Underwater Challenge"
 }

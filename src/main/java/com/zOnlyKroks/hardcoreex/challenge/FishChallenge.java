@@ -28,13 +28,6 @@ public class FishChallenge extends Challenge{
     protected void tick() {
     }
 
-    /*@SubscribeEvent
-    public void doClientStuff(FMLClientSetupEvent event) {
-            Minecraft.getInstance().getRenderManager().getSkinMap().forEach((s, playerRenderer) -> {
-                playerRenderer.addLayer(new LayerModel(playerRenderer));
-            });
-    }*/
-
     @SubscribeEvent
     public void waterCheck(TickEvent.PlayerTickEvent event) {
         PlayerEntity player = event.player;
@@ -42,32 +35,6 @@ public class FishChallenge extends Challenge{
             event.player.setAir(300);
         } else if (!player.isInWater()) {
             player.attackEntityFrom(DamageSource.DROWN, 0.5F);
-        }
-    }
-
-    @SubscribeEvent
-    public void renderPlayer(RenderPlayerEvent.Pre event) {
-        event.getRenderer().getEntityModel().setVisible(false);
-    }
-
-    @SubscribeEvent
-    public void renderPlayer(RenderPlayerEvent.Post event) {
-        event.getRenderer().getEntityModel().setVisible(true);
-    }
-
-    @SubscribeEvent
-    public void onPlayerChangeSeize(EntityEvent.Size event) {
-        if(event.getEntity() instanceof PlayerEntity) {
-            event.setNewSize(EntitySize.flexible(1.0F, 0.5F));
-            event.setNewEyeHeight(0.4F);
-        }
-    }
-
-    @SubscribeEvent
-    public static void entityTick(TickEvent.PlayerTickEvent event) {
-        EntitySize size = event.player.getSize(Pose.STANDING);
-        if(event.player.getSize(Pose.STANDING).equals(size)) {
-            event.player.recalculateSize();
         }
     }
 
